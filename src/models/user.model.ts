@@ -1,4 +1,16 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  Column,
+  DataType,
+  HasMany,
+  HasOne,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { Address } from './address.model';
+import { Cart } from './cart.model';
+import { Order } from './order.model';
+import { Review } from './review.model';
+import { UserCoupon } from './user-coupon.model';
 
 export enum UserRoles {
   ADMIN = 'ADMIN',
@@ -50,4 +62,19 @@ export class User extends Model<User> {
     type: DataType.STRING,
   })
   provider: string;
+
+  @HasMany(() => Address)
+  addresses: Address[];
+
+  @HasMany(() => Order)
+  orders: Order[];
+
+  @HasOne(() => Cart)
+  cart: Cart[];
+
+  @HasMany(() => UserCoupon)
+  coupons: UserCoupon[];
+
+  @HasMany(() => Review)
+  reviews: Review[];
 }
