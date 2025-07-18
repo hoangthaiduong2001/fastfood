@@ -3,9 +3,12 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
+import { CartItem } from './cart-item.model';
+import { OrderItem } from './order-item.model';
 import { Product } from './product.model';
 
 export enum ProductVariantSize {
@@ -60,4 +63,10 @@ export class ProductVariant extends Model<ProductVariant> {
 
   @BelongsTo(() => Product)
   product: Product;
+
+  @HasMany(() => OrderItem)
+  orderItems: OrderItem[];
+
+  @HasMany(() => CartItem)
+  cartItems: CartItem[];
 }

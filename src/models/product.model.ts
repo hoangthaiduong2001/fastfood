@@ -3,10 +3,14 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
+import { CartItem } from './cart-item.model';
 import { Category } from './category.model';
+import { OrderItem } from './order-item.model';
+import { Review } from './review.model';
 
 @Table
 export class Product extends Model<Product> {
@@ -56,4 +60,13 @@ export class Product extends Model<Product> {
 
   @BelongsTo(() => Category)
   category: Category;
+
+  @HasMany(() => OrderItem)
+  orderItems: OrderItem[];
+
+  @HasMany(() => CartItem)
+  cartItems: CartItem[];
+
+  @HasMany(() => Review)
+  reviews: Review[];
 }
