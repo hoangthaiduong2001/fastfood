@@ -13,7 +13,7 @@ async function bootstrap() {
       forbidNonWhitelisted: true, //thông báo lỗi nếu có filed dư
       transform: true, //chuyển payload thành instance cảu dto
       transformOptions: {
-        enableImplicitConversion: true, //cho phép chuyển dữ liệu của filed(vd: string to number)
+        enableImplicitConversion: true, //cho phép chuyển dữ liệu của filed (vd: string to number)
       },
     }),
   );
