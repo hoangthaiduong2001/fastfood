@@ -14,8 +14,8 @@ export class CategoryService {
     return await this.categoryModel.create(body as any);
   }
 
-  findAll() {
-    return `This action returns all category`;
+  async findAll() {
+    return await this.categoryModel.findAll();
   }
 
   findOne(id: number) {
