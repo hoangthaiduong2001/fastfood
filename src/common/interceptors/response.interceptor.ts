@@ -30,6 +30,9 @@ export class TransformInterceptor<T>
     next: CallHandler,
   ): Observable<APIResponse<T>> | Promise<Observable<APIResponse<T>>> {
     const request = context.switchToHttp().getRequest();
+    const startTime = request['startTime'];
+    const endTime = Date.now();
+    const takenTime = `${endTime - startTime}ms`;
     return next.handle().pipe(
       map((data) => {
         if (
@@ -54,8 +57,12 @@ export class TransformInterceptor<T>
           success: true,
           message: finalMessage,
           data,
-          date: new Date(),
+          date: new Date().toLocaleString('vi-VN', {
+            timeZone: 'Asia/Ho_Chi_Minh',
+            hour12: false,
+          }),
           path: request.url,
+          takenTime,
         };
       }),
     );
