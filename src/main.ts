@@ -2,6 +2,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { AllExceptionFilter } from './common/filters/all-exception.flter';
 import { TransformInterceptor } from './common/interceptors/response.interceptor';
 
 async function bootstrap() {
@@ -19,6 +20,7 @@ async function bootstrap() {
     }),
   );
   app.useGlobalInterceptors(new TransformInterceptor());
+  app.useGlobalFilters(new AllExceptionFilter());
   const port = configService.get<number>('SERVER_PORT') ?? 3000;
   logger.log(`Server started on port ${port}`);
   await app.listen(port);
